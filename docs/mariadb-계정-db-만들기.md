@@ -28,7 +28,6 @@ MariaDb [(none)]>flush privileges;
 ```sh
 # mysql -u webdb -D webdb -p
 password:
-zz
 ```
 
 OPT_LOCAL_INFILE=1
