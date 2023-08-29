@@ -19,6 +19,9 @@ MariaDb [(none)]>create user 'myuser'@'192.168.%' idetified by 'myuser';
 ```sh
 MariaDb [(none)]>grant all privileges on webdb.* to 'webdb'@'localhost';
 MariaDb [(none)]>flush privileges;
+
+MariaDb [(none)]>grant all privileges on myuser.* to 'myuser'@'192.168.%';
+MariaDb [(none)]>flush privileges;
 ```
 
 5. 확인하기
@@ -26,3 +29,5 @@ MariaDb [(none)]>flush privileges;
 # mysql -u webdb -D webdb -p
 password:
 ```
+
+OPT_LOCAL_INFILE=1

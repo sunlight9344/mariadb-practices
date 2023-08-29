@@ -34,3 +34,8 @@ select * from pet;
 -- update : DML(U)
 update pet set name='성타니' where name='성탄이';
 
+-- delete  
+delete from pet where name='성타니';
+
+-- load data
+load data local infile 'd:\pet.txt' into table pet;
