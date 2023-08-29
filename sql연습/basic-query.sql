@@ -39,3 +39,27 @@ delete from pet where name='성타니';
 
 -- load data
 load data local infile 'd:\pet.txt' into table pet;
+update pet set death = null where name != 'bowser';
+
+-- select 연습
+select owner from pet where name='bowser';
+select * from pet where birth >= 1998-01-01;
+select * from pet where species='snake' or species='bird';
+
+-- order by
+select name, birth from pet order by birth asc;
+select name, birth from pet order by birth desc;
+
+select name, birth, death from pet where death is null;
+
+-- like 검색(패턴검색)
+select name from pet where name like 'b%';
+select name from pet where name like '%fy';
+select name from pet where name like '%w%';
+select name from pet where name like '____';
+select name from pet where name like 'b____';
+
+-- 집계: count, avg, sum, max, min...
+select count(*) from pet;
+select max(birth) from pet;
+select * from pet;
