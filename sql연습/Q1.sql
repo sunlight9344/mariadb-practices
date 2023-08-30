@@ -25,7 +25,7 @@ hire_date as '입사일'
  select * from departments order by length(dept_name) desc;
  
  -- 8
- select count(*) from salaries where salary >= 120000;
+ select count(distinct emp_no) from salaries where salary >= 120000;
  
  -- 9
  select distinct title from titles order by length(title) desc;
