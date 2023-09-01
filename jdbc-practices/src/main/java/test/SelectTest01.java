@@ -16,6 +16,9 @@ public class SelectTest01 {
 	
 	public static void searchEmployees(String keyword) {
 		Connection conn = null;
+		ResultSet rs = null;
+		Statement stmt = null;
+		
 		try {
 			//1. JDBC Driver Class 로딩
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -25,7 +28,7 @@ public class SelectTest01 {
 			conn = DriverManager.getConnection(url, "hr", "hr");
 			
 			//3. Statement 객체 생성
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			
 			//4. SQL 실행
 			String sql = 
@@ -34,7 +37,7 @@ public class SelectTest01 {
 					" where first_name like '%" + keyword + "%'" +
 					"   and last_name like '%" + keyword + "%'";
 			
-			ResultSet rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 			
 			//5. 결과 처리
 			while(rs.next()) {
@@ -52,6 +55,13 @@ public class SelectTest01 {
 			System.out.println("error:" + e);
 		} finally {
 			try {
+				//6. 자원정리
+				if(rs != null) {
+					rs.close();
+				}
+				if(stmt != null) {
+					stmt.close();
+				}
 				if(conn != null) {
 					conn.close();
 				}
