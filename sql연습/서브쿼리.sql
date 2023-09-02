@@ -151,7 +151,18 @@ group by a.dept_no;
    
 -- sol1) where절 subquery in, 복수행/복수컬럼
 select c.dept_name, a.first_name, d.salary
-  from employees a, dept_emp b, departments c, salaries d
+  from 
+  
+  
+  
+  +
+  
+  
+  
+  
+  
+  
+  a, dept_emp b, departments c, salaries d
  where a.emp_no = b.emp_no
    and b.dept_no = c.dept_no
    and a.emp_no = d.emp_no
