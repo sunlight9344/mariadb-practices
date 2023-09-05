@@ -7,6 +7,13 @@ public class OrderVo {
 	private int orders_price;
 	private String address;
 	
+	public OrderVo(int member_no, String orders_no, int orders_price, String address) {
+		this.member_no = member_no;
+		this.orders_no = orders_no;
+		this.orders_price = orders_price;
+		this.address = address;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderVo [no=" + no + ", member_no=" + member_no + ", orders_no=" + orders_no + ", orders_price="

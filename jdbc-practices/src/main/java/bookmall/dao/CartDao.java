@@ -6,22 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bookmall.connection.BookMallConnection;
 import bookmall.vo.CartVo;
 
-public class CartDao {
+public class CartDao extends BookMallConnection{
 	
-	public static void findAll() {
+	public void findAll() {
 		ResultSet rs = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			//1. JDBC Driver Class 로딩
-			Class.forName("org.mariadb.jdbc.Driver");
 			
-			//2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.180:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+			conn = getConnection();
 			
 			//3. ready SQL
 			String sql = 
@@ -45,8 +43,6 @@ public class CartDao {
 						+ " " + name + " " + price);
 			}
 
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -64,17 +60,13 @@ public class CartDao {
 		}
 	}
 
-	public static void insert(CartVo cartVo) {
+	public void insert(CartVo cartVo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			//1. JDBC Driver Class 로딩
-			Class.forName("org.mariadb.jdbc.Driver");
-			
-			//2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.180:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
+
+			conn = getConnection();
 			
 			//3. ready SQL
 			String sql = 
@@ -86,11 +78,8 @@ public class CartDao {
 			pstmt.setInt(2, cartVo.getMemberNo());
 			pstmt.setInt(3, cartVo.getQuantity());
 			
-			//5. SQL 실행
-			int count = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -107,6 +96,4 @@ public class CartDao {
 			}
 		}
 	}
-
-	
 }

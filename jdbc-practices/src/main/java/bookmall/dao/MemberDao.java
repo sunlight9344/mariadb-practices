@@ -1,34 +1,26 @@
 package bookmall.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import bookmall.connection.BookMallConnection;
 import bookmall.vo.MemberVo;
 
-public class MemberDao {
+public class MemberDao extends BookMallConnection{
 
-	public static void findAll() {
+	public void findAll() {
 		ResultSet rs = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			//1. JDBC Driver Class 로딩
-			Class.forName("org.mariadb.jdbc.Driver");
+			conn = getConnection();
 			
-			//2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.180:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
-			
-			//3. ready SQL
-			String sql = 
-					"select * from member";
+			String sql = "select * from member";
 			pstmt = conn.prepareStatement(sql);
 			
-			//5. SQL 실행
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -42,8 +34,6 @@ public class MemberDao {
 						+ " " + email + " " + pw);
 			}
 
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -61,34 +51,23 @@ public class MemberDao {
 		}
 	}
 
-	public static void insert(MemberVo memberVo) {
+	public void insert(MemberVo memberVo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			//1. JDBC Driver Class 로딩
-			Class.forName("org.mariadb.jdbc.Driver");
+			conn = getConnection();
 			
-			//2. 연결하기
-			String url = "jdbc:mariadb://192.168.0.180:3307/bookmall?charset=utf8";
-			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
-			
-			//3. ready SQL
-			String sql = 
-					"insert into member values(null,?,?,?,?)";
+			String sql = "insert into member values(null,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			
-			//4. 값 binding
 			pstmt.setString(1, memberVo.getName());
 			pstmt.setString(2, memberVo.getPhone());
 			pstmt.setString(3, memberVo.getEmail());
 			pstmt.setString(4, memberVo.getPw());
 			
-			//5. SQL 실행
-			int count = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {

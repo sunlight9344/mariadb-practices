@@ -11,7 +11,7 @@ import bookmall.vo.BookVo;
 
 public class BookDao extends BookMallConnection {
 	
-	public static void findAll() {
+	public void findAll() {
 		ResultSet rs = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -55,7 +55,7 @@ public class BookDao extends BookMallConnection {
 		}
 	}
 
-	public static void insert(BookVo bookVo) {
+	public void insert(BookVo bookVo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
