@@ -47,9 +47,7 @@ public class SelectTest02 {
 				String lastName = rs.getString(3);
 				
 				System.out.println(empNo + " - " + firstName + " " + lastName);
-				
 			}
-			
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
@@ -71,5 +69,4 @@ public class SelectTest02 {
 			}
 		}
 	}
-	
 }
