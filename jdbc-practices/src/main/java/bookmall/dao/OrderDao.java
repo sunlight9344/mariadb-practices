@@ -65,10 +65,11 @@ public class OrderDao extends BookMallConnection{
 		try {
 			conn = getConnection();
 			
-			String sql = "insert into orders values(null,1,'202301010001',20000,'서울시 이촌동')";
+			String sql = "insert into orders values(null,? ,? ,?, ?)";
+			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, orderVo.getNo());
+			pstmt.setInt(1, orderVo.getMember_no());
 			pstmt.setString(2, orderVo.getOrders_no());
 			pstmt.setInt(3, orderVo.getOrders_price());
 			pstmt.setString(4, orderVo.getAddress());
@@ -100,7 +101,7 @@ public class OrderDao extends BookMallConnection{
 			conn = getConnection();
 			
 			//3. ready SQL
-			String sql = "select c.no, c.orders_no, b.title, b.price, a.quantity, d.name, c.orders_price, c.address"
+			String sql = "select c.no, c.orders_no, b.title, b.price, a.quantity, b.price*a.quantity, d.name, c.address"
 					+ " from orders_book a, book b, orders c, member d"
 					+ " where a.book_no = b.no"
 					+ " and a.orders_no = c.no"
@@ -116,12 +117,12 @@ public class OrderDao extends BookMallConnection{
 				String title = rs.getString(3);
 				int price = rs.getInt(4);
 				int quantity = rs.getInt(5);
-				String name = rs.getString(6);
-				int order_price= rs.getInt(7);
+				int price_quantity = rs.getInt(6);
+				String name = rs.getString(7);
 				String address = rs.getString(8);
 				
 				System.out.println(no + " - " + name + " " + orders_no
-						+ " " + title + " " + price + " " + quantity + " " + name + " " + order_price + " " + address);
+						+ " " + title + " " + price + " " + quantity + " " + price_quantity+ " " + name + " " + address);
 			}
 
 		} catch (SQLException e) {

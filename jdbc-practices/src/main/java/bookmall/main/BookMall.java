@@ -15,7 +15,7 @@ import bookmall.vo.OrderVo;
 public class BookMall {
 	public static void main(String[] args) {
 		
-		// generate Category data
+		// generate Category data (name)
 		new CategoryDao().insert(new CategoryVo("수필"));
 		new CategoryDao().insert(new CategoryVo("액션"));
 		new CategoryDao().insert(new CategoryVo("SF"));
@@ -24,16 +24,16 @@ public class BookMall {
 		new CategoryDao().findAll();
 		System.out.println();
 		
-		// generate Book data
-		new BookDao().insert(new BookVo(1,"뿡뿡이의모험",20000));
-		new BookDao().insert(new BookVo(2,"임가영의하루",31000));
-		new BookDao().insert(new BookVo(3,"도라에몽의습격",99999));
+		// generate Book data (category_no, title, price)
+		new BookDao().insert(new BookVo(1,"뿡뿡이의모험",10000));
+		new BookDao().insert(new BookVo(2,"임가영의하루",20000));
+		new BookDao().insert(new BookVo(3,"도라에몽의습격",30000));
 		// print Book list
 		System.out.println("## 상품");
 		new BookDao().findAll();
 		System.out.println();
 
-		// generate Member data
+		// generate Member data (name, phone, pw, email)
 		new MemberDao().insert(new MemberVo("전예준","010-9609-9344","1111","sunlight@naver.com"));
 		new MemberDao().insert(new MemberVo("임가영","010-2877-6320","2222","rkdudrhdwn@gmail.com"));
 		// print member list
@@ -41,24 +41,24 @@ public class BookMall {
 		new MemberDao().findAll();
 		System.out.println();
 		
-		// generate Cart data
-		new CartDao().insert(new CartVo(1,1,2));
-		new CartDao().insert(new CartVo(2,2,1));
+		// generate Cart data (book_no, member_no, quantity)
+		new CartDao().insert(new CartVo(1,1,1));
+		new CartDao().insert(new CartVo(2,1,2));
 		// print Cart list
 		System.out.println("## 카트");
 		new CartDao().findAll();
 		System.out.println();
 		
-		// generate Order data
-		new OrderDao().insertOrder(new OrderVo(1,"202301010001",20000,"서울시 이촌동"));
+		// generate Order data (member_no, order_no, order_price, address)
+		new OrderDao().insertOrder(new OrderVo(1,"202301010001",50000,"서울시 이촌동"));
 		// print Order list
 		System.out.println("## 주문");
 		new OrderDao().findAllOrder();
 		System.out.println();
 		
-		// generate order_book data
-		new OrderDao().insertOrderBook(new OrderBookVo(1,2,3));
-		new OrderDao().insertOrderBook(new OrderBookVo(1,1,4));
+		// generate order_book data (orders_no, book_no, quantity)
+		new OrderDao().insertOrderBook(new OrderBookVo(1,1,1));
+		new OrderDao().insertOrderBook(new OrderBookVo(1,2,2));
 		// print order_book list
 		System.out.println("## 주문 도서");
 		new OrderDao().findAllOrderBook();
